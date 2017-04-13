@@ -29,12 +29,12 @@ public class Utils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        TextView text = new TextView(hostContext);
-        text.setText("yourpage");
-        text.setTextColor(Color.RED);
-        text.setTextSize(20);
-        return text;
-//        return null;
+//        TextView text = new TextView(hostContext);
+//        text.setText("yourpage");
+//        text.setTextColor(Color.RED);
+//        text.setTextSize(20);
+//        return text;
+        return null;
     }
 
     public static boolean isAppInstalled(){

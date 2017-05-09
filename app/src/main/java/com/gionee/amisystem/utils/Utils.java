@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gionee.amisystem.APP;
 
@@ -29,23 +30,16 @@ public class Utils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        TextView text = new TextView(hostContext);
-//        text.setText("yourpage");
-//        text.setTextColor(Color.RED);
-//        text.setTextSize(20);
-//        return text;
         return null;
     }
 
     public static boolean isAppInstalled(){
         PackageManager pm = APP.getAppContext().getPackageManager();
-        boolean installed;
         try{
             pm.getPackageInfo(Constants.PLUGIN_PACKAGE_NAME,PackageManager.GET_ACTIVITIES);
-            installed =true;
+            return true;
         }catch(PackageManager.NameNotFoundException e){
-            installed =false;
         }
-        return installed;
+        return false;
     }
 }

@@ -11,7 +11,7 @@ import com.gionee.amisystem.view.YourPageFragment;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     ViewPager mViewPager;
-    int mCount;
+    boolean mEnableYourPage = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 try {
                     Log.d(TAG, "onPageSelected: position = " +position);
-                    if(mCount == 2){
+                    if(mEnableYourPage){
                         YourPageFragment view = (YourPageFragment) mViewPager.getChildAt(0);
                         view.onYourPageSelected(position == 0 ? true : false);
                         Log.d(TAG, "onPageSelected: " +(position == 0 ? true : false));
@@ -46,18 +46,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mCount = mViewPager.getAdapter().getCount();
+        mEnableYourPage = mViewPager.getAdapter().getCount() == 2;
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(mCount == 2){
+        if(mEnableYourPage){
             try {
                 YourPageFragment view = (YourPageFragment) mViewPager.getChildAt(0);
-                view.onYourPageResume();
-                Log.d(TAG, "onYourPageResume: ");
+                view.onResume();
+                Log.d(TAG, "onResume: ");
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -67,11 +67,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(mCount == 2){
+        if(mEnableYourPage){
             try {
                 YourPageFragment view = (YourPageFragment) mViewPager.getChildAt(0);
-                view.onYourPagePause();
-                Log.d(TAG, "onYourPagePause: ");
+                view.onPause();
+                Log.d(TAG, "onPause: ");
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -82,11 +82,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(mCount == 2){
+        if(mEnableYourPage){
             try {
                 YourPageFragment view = (YourPageFragment) mViewPager.getChildAt(0);
-                view.onYourPageRemove();
-                Log.d(TAG, "onYourPageRemove: ");
+                view.onDestroy();
+                Log.d(TAG, "onDestroy: ");
             }catch (Exception e){
                 e.printStackTrace();
             }

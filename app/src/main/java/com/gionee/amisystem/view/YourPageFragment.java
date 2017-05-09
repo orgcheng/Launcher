@@ -27,16 +27,6 @@ public class YourPageFragment extends FrameLayout implements View.OnClickListene
 
         View rootView = LayoutInflater.from(context).inflate(R.layout.fragment_yourpage, this);
         rootView.findViewById(R.id.load_yourpage).setOnClickListener(this);
-//        Handler mHandler = null;
-//        // 0是onPause发生的消息
-//        // 1是onResume发送的消息
-//
-//        // onResume时,移除0
-//        mHandler.removeMessages(0);
-//
-//        // 0是onPause发生的消息,移除1
-//        mHandler.removeMessages(1);
-
     }
 
     @Override
@@ -44,7 +34,8 @@ public class YourPageFragment extends FrameLayout implements View.OnClickListene
         mYourPageView = Utils.getYourPage();
         if (mYourPageView != null) {
             removeAllViews();
-            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
             addView(mYourPageView, lp);
         } else {
             Toast.makeText(getContext(), "load failed", Toast.LENGTH_SHORT).show();
@@ -52,26 +43,25 @@ public class YourPageFragment extends FrameLayout implements View.OnClickListene
     }
 
 
-    public void onYourPageResume() {
+    public void onResume() {
         if (mYourPageView != null) {
-            callOnMethod(mYourPageView, "onYourPageResume");
+            callOnMethod(mYourPageView, "onResume");
         }
     }
 
-    public void onYourPagePause() {
+    public void onPause() {
         if (mYourPageView != null) {
-            callOnMethod(mYourPageView, "onYourPagePause");
+            callOnMethod(mYourPageView, "onPause");
         }
     }
 
-    public void onYourPageRemove() {
+    public void onDestroy() {
         if (mYourPageView != null) {
-            callOnMethod(mYourPageView, "onYourPageRemove");
+            callOnMethod(mYourPageView, "onDestroy");
         }
     }
 
     public void onYourPageSelected(boolean selected) {
-        // 可以保存一个变量,连续的selected = false不必调用两次方法
         if (mYourPageView != null) {
             callOnMethod(mYourPageView, "onYourPageSelected", new Class[]{Boolean.TYPE}, selected);
         }
